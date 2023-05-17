@@ -16,13 +16,13 @@ public class LoginSteps {
 
     @When("Enter username and password and click login button")
     public void enterUsernameAndPasswordAndClickLoginButton() {
-        dc.sendkeysFunc(dc.username, "turkeyts");
-        dc.sendkeysFunc(dc.password,"TechnoStudy123");
+        dc.sendkeysFunc(dc.username, dc.findFromExcel("Username"));
+        dc.sendkeysFunc(dc.password,dc.findFromExcel("Password"));
         dc.clickFunc(dc.loginButton);
     }
 
     @Then("User should login successfully")
     public void userShouldLoginSuccessfully() {
-        dc.verifyContainsTextFunction(dc.txtTechnoStudy,"Techno Study");
+        dc.verifyContainsTextFunction(dc.dashboard,"Dashboard");
     }
 }

@@ -1,6 +1,9 @@
 package Pages;
 
 import Utility.GWD;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,8 +12,8 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
 import java.time.Duration;
-import java.util.concurrent.TimeoutException;
 
 public class Parent {
     WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(20));
@@ -69,5 +72,34 @@ public class Parent {
         }
     }
 
+    public String findFromExcel(String text) {
+
+        String returnData = "";
+
+        String path = "src/test/resources/LoginData.xlsx";
+
+        Sheet sheet = null;
+
+        try {
+            FileInputStream inputStream = new FileInputStream(path);
+            Workbook workbook = WorkbookFactory.create(inputStream);
+            sheet = workbook.getSheetAt(0);
+        } catch (Exception e) {
+
+        }
+
+        for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+
+            if (sheet.getRow(i).getCell(0).toString().equalsIgnoreCase(text)) {
+                for (int j = 1; j < sheet.getRow(i).getPhysicalNumberOfCells(); j++) {
+                    returnData += sheet.getRow(i).getCell(j);
+
+                }
+            }
+        }
+
+        return returnData;
     }
+
+}
 

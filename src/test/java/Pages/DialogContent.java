@@ -21,8 +21,8 @@ public class DialogContent extends Parent {
     public WebElement username;
     @FindBy(css = "input[formcontrolname='password']")
     public WebElement password;
-    @FindBy(css = "span[class='mat-tooltip-trigger logo-text']")
-    public WebElement txtTechnoStudy;
+    @FindBy(css = "span[class='nav-link-title']")
+    public WebElement dashboard;
     @FindBy(css = "button[aria-label='LOGIN']")
     public WebElement loginButton;
     @FindBy(xpath = "//ms-add-button[contains(@tooltip,'ADD')]//button")
